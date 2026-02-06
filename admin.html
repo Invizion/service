@@ -64,4 +64,51 @@
     <script src="js/database.js"></script>
     <script src="js/pdf-gen.js"></script>
 </body>
+
+
+    <div id="repairModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+        <div class="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tighter">FIȘĂ NOUĂ DE SERVICE</h3>
+                <p class="text-sm text-slate-500 font-medium">Introdu datele cu atenție pentru garanție.</p>
+            </div>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-900 transition">
+                <i class="fas fa-times-circle text-2xl"></i>
+            </button>
+        </div>
+        
+        <form id="addRepairForm" class="p-8 grid grid-cols-2 gap-6">
+            <div class="col-span-1">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Nume Client</label>
+                <input type="text" id="c_name" required class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-bold">
+            </div>
+            <div class="col-span-1">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Telefon (WhatsApp)</label>
+                <input type="text" id="c_phone" required placeholder="07xxxxxxxx" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-bold">
+            </div>
+            <div class="col-span-1">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Model Dispozitiv</label>
+                <input type="text" id="d_model" required placeholder="ex: iPhone 14 Pro" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-bold">
+            </div>
+            <div class="col-span-1">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">IMEI / Serie</label>
+                <input type="text" id="d_imei" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-bold uppercase">
+            </div>
+            <div class="col-span-2">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Defect Reclamat</label>
+                <textarea id="d_defect" rows="3" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-medium"></textarea>
+            </div>
+            <div class="col-span-1">
+                <label class="block text-[10px] font-black uppercase text-slate-400 mb-2 ml-1">Preț Estimat (RON)</label>
+                <input type="number" id="p_estimat" value="0" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none font-black text-blue-600 text-xl">
+            </div>
+            <div class="col-span-1 flex items-end pb-1">
+                <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black hover:bg-blue-600 transition-all shadow-xl shadow-slate-200">
+                    SALVEAZĂ FIȘA
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </html>
