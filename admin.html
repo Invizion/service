@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Mircioiu PRO | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-[#F8FAFC] flex min-h-screen">
+
+    <aside class="w-72 bg-slate-900 text-white flex flex-col fixed h-full">
+        <div class="p-8 text-2xl font-black italic tracking-tighter border-b border-slate-800">MMS PRO HUB</div>
+        <nav class="p-6 flex-1 space-y-2">
+            <a href="#" class="flex items-center gap-3 p-4 bg-blue-600 rounded-2xl font-bold transition"><i class="fas fa-microchip"></i> Reparații Live</a>
+            <a href="#" class="flex items-center gap-3 p-4 text-slate-400 hover:bg-slate-800 rounded-2xl transition"><i class="fas fa-history"></i> Arhivă</a>
+            <a href="#" class="flex items-center gap-3 p-4 text-slate-400 hover:bg-slate-800 rounded-2xl transition"><i class="fas fa-chart-pie"></i> Rapoarte Profit</a>
+        </nav>
+        <button onclick="supabase.auth.signOut().then(() => location.reload())" class="p-8 text-red-400 text-left hover:bg-red-900/20 transition font-bold uppercase text-xs tracking-widest italic">Deconectare Securizată</button>
+    </aside>
+
+    <main class="flex-1 ml-72 p-12">
+        <header class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl font-black text-slate-900 tracking-tighter">CENTRU DE COMANDĂ</h2>
+                <p class="text-slate-400 font-medium">Gestionare flux service în timp real</p>
+            </div>
+            <button onclick="openModal()" class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-blue-200 hover:scale-105 transition">+ FIȘĂ NOUĂ</button>
+        </header>
+
+        <div class="grid grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+                <p class="text-slate-400 uppercase text-[10px] font-black tracking-widest mb-1">În Lucru</p>
+                <h4 id="statInLucru" class="text-3xl font-black text-blue-600">0</h4>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+                <p class="text-slate-400 uppercase text-[10px] font-black tracking-widest mb-1">Finalizate</p>
+                <h4 id="statReady" class="text-3xl font-black text-green-600">0</h4>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+                <p class="text-slate-400 uppercase text-[10px] font-black tracking-widest mb-1">Profit Estimat</p>
+                <h4 id="statProfit" class="text-3xl font-black text-slate-900">0 RON</h4>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-slate-50/50">
+                    <tr class="text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                        <th class="p-6">ID / Cod Client</th>
+                        <th class="p-6">Informații Client</th>
+                        <th class="p-6">Echipament</th>
+                        <th class="p-6 text-center">Status</th>
+                        <th class="p-6 text-right">Administrare</th>
+                    </tr>
+                </thead>
+                <tbody id="adminBody" class="divide-y divide-slate-50">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/pdf-gen.js"></script>
+</body>
+</html>

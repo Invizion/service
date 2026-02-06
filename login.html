@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | MMS Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
+    <div class="bg-white/10 backdrop-blur-lg p-8 rounded-3xl w-full max-w-sm border border-white/10 shadow-2xl">
+        <h2 class="text-white text-2xl font-black mb-6 text-center tracking-tighter uppercase">MMS Admin Access</h2>
+        <form id="lForm" class="space-y-4">
+            <input type="email" id="email" placeholder="Email Tehnician" class="w-full p-4 rounded-xl bg-slate-800 text-white border-none focus:ring-2 focus:ring-blue-500 outline-none">
+            <input type="password" id="pass" placeholder="Parolă" class="w-full p-4 rounded-xl bg-slate-800 text-white border-none focus:ring-2 focus:ring-blue-500 outline-none">
+            <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition">LOGHEAZĂ-TE</button>
+        </form>
+    </div>
+    <script src="js/config.js"></script>
+    <script>
+        document.getElementById('lForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const { error } = await supabase.auth.signInWithPassword({
+                email: document.getElementById('email').value,
+                password: document.getElementById('pass').value
+            });
+            if (error) alert("Acces Refuzat!");
+            else window.location.href = 'admin.html';
+        };
+    </script>
+</body>
+</html>

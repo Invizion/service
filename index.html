@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Mircioiu Mobile Service | Status Reparație</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-sans">
+    <nav class="p-6 max-w-7xl mx-auto flex justify-between items-center">
+        <div class="text-2xl font-black italic text-slate-900">MMS<span class="text-blue-600">.</span></div>
+        <a href="login.html" class="text-slate-400 hover:text-slate-900 transition text-sm">Portal Staff</a>
+    </nav>
+
+    <main class="max-w-xl mx-auto mt-20 px-6">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-blue-100 border border-slate-100">
+            <h1 class="text-3xl font-black mb-2 text-slate-800">Urmărire Device</h1>
+            <p class="text-slate-500 mb-8">Introdu codul de pe fișa primită în service.</p>
+
+            <div class="space-y-4">
+                <input id="trackId" type="text" placeholder="ID Fișă" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-center text-xl font-bold">
+                <input id="trackCode" type="text" placeholder="Cod Unic" class="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-center text-xl font-bold uppercase">
+                <button onclick="getStatus()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-blue-200 transition-all">VERIFICĂ STATUS</button>
+            </div>
+
+            <div id="result" class="hidden mt-10 p-6 rounded-2xl bg-blue-50 border border-blue-100 animate-bounce-in">
+                </div>
+        </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script>
+        async function getStatus() {
+            const id = document.getElementById('trackId').value;
+            const code = document.getElementById('trackCode').value;
+            const resDiv = document.getElementById('result');
+
+            const { data, error } = await supabase.from('reparatii')
+                .select('*').eq('id', id).eq('cod_verificare', code).single();
+
+            if (error) alert("Cod incorect!");
+            else {
+                resDiv.classList.remove('hidden');
+                resDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-black uppercase text-blue-600 tracking-widest">Status Curent</span>
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-[10px] font-bold">${data.status}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">${data.device_model}</h3>
+                    <p class="text-slate-600 text-sm mt-2">${data.defect_reclamat}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
